@@ -39,9 +39,9 @@ abi = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["abi"]
 
 # using HTTPProvider//RPC Provider(RemoteProcedureCall, aka: Set of rules for interaction) 
 # to connect to ganache blockchain simulation
-w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
+w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:8545"))
 chain_id = 1337
-my_address = "0x7838982b1eC9888078f71702E51B9a2C8dCC4b3C"
+my_address = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
 private_key = os.getenv("PRIVATE_KEY")
 
 # Creating the smart contract in python
@@ -49,6 +49,8 @@ SimpleStorage = w3.eth.contract(abi=abi, bytecode=bytecode)
 
 ###1. Building the transaction ###STEPS FOR DEPLOYING CONTRACT
 # Getting the latest transaction number 
+print("deploying contract")
+
 nonce = w3.eth.getTransactionCount(my_address)
 transaction = SimpleStorage.constructor().buildTransaction(
     {"chainId": chain_id, "from": my_address, "nonce": nonce, "gasPrice": w3.eth.gas_price,}
@@ -61,6 +63,7 @@ signed_transaction = w3.eth.account.sign_transaction(transaction, private_key=pr
 transaction_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
 # Good practice to wait for blovk confirmation(aka: receipt)
 transaction_receipt = w3.eth.wait_for_transaction_receipt(transaction_hash)
+print("contract deployed")
 
 # Working with contracts [prerequisites:contract address and ABI]
 simple_storage = w3.eth.contract(address=transaction_receipt.contractAddress, abi=abi)
@@ -69,6 +72,7 @@ simple_storage = w3.eth.contract(address=transaction_receipt.contractAddress, ab
 print(simple_storage.functions.retrieve().call())
 
 # Building a transaction to store value in contract
+print("updating contract")
 store_transaction = simple_storage.functions.store(15).buildTransaction(
     {"chainId": chain_id, "from": my_address, "nonce": nonce + 1, "gasPrice": w3.eth.gas_price,}
 )
@@ -79,6 +83,7 @@ signed_store_transaction = w3.eth.account.sign_transaction(
 #sending transaction
 store_transaction_hash = w3.eth.send_raw_transaction(signed_store_transaction.rawTransaction)
 store_transaction_receipt = w3.eth.wait_for_transaction_receipt(store_transaction_hash)
+print("contract updated")
 
 print(simple_storage.functions.retrieve().call())
 
