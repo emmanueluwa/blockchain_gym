@@ -30,8 +30,9 @@ contract SimpleStorage {
         nameToluckyNumber[_name] = _luckyNumber;
     }
 
-    function store(uint256 _luckyNumber) public {
+    function store(uint256 _luckyNumber) public returns (uint256) {
         luckyNumber = _luckyNumber;
+        return _luckyNumber;
     }
 
     function retrieve() public view returns (uint256) {
