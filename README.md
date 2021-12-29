@@ -1,1 +1,1 @@
-# blockchain_gym
+Working with Blockchain Ethereum Smart Contracts.
