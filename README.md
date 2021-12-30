@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-# blockchain_gym
+Working with Blockchain Ethereum Smart Contracts.
 
 GENACHE BLOCKCHAIN SIMULATOR
 
 - https://trufflesuite.com/index.html
-=======
-Working with Blockchain Ethereum Smart Contracts.
->>>>>>> refs/remotes/origin/main
