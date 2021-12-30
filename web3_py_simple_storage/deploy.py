@@ -38,10 +38,10 @@ bytecode = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["evm"
 abi = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["abi"]
 
 # using HTTPProvider//RPC Provider(RemoteProcedureCall, aka: Set of rules for interaction) 
-# to connect to ganache blockchain simulation
-w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:8545"))
-chain_id = 1337
-my_address = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+# to connect to ganache blockchain simulation// rinkeby using rinkeby pk, address, http and chain id
+w3 = Web3(Web3.HTTPProvider("https://rinkeby.infura.io/v3/795206dcf4bc4b89af0142e2c9a165d1"))
+chain_id = 4
+my_address = "0xEb085372b4C39b156fFBced6FDfFc725B1c84caA"
 private_key = os.getenv("PRIVATE_KEY")
 
 # Creating the smart contract in python
