@@ -61,7 +61,7 @@ signed_transaction = w3.eth.account.sign_transaction(transaction, private_key=pr
 
 ###3. Sending signed transaction to blockchain
 transaction_hash = w3.eth.send_raw_transaction(signed_transaction.rawTransaction)
-# Good practice to wait for blovk confirmation(aka: receipt)
+# Good practice to wait for block confirmation(aka: receipt)
 transaction_receipt = w3.eth.wait_for_transaction_receipt(transaction_hash)
 print("contract deployed")
 
