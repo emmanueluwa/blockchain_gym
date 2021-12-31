@@ -1,0 +1,8 @@
+dependencies:
+  # - <organisation/repo>@<version> #from github
+  - smartcontractkit/chainlink-brownie-contracts@1.1.1
+# telling solidity where chainlink imports are from
+compiler:
+  solc:
+    remappings:
+      - "@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1"
