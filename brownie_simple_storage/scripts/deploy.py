@@ -1,9 +1,9 @@
-from brownie import accounts, config, SimpleStorage
+from brownie import accounts, config, SimpleStorage, network
 
 # nice architecture to have all deployment logic in individual function
 def deploy_simple_storage():
     ##using ganache built-in local accounts 
-    account = accounts[0]
+    account = get_account()
     #using brownie to deploy contract, stating which account is being used to deploy it, transaction function so change is made to 
     #blockchain
     simple_storage = SimpleStorage.deploy({"from": account})
@@ -25,6 +25,14 @@ def deploy_simple_storage():
     # print(account)
     # account = accounts.add(config["wallets"]["from_key"])
     # print(account)
+
+def get_account():
+    if network.show_active() == "development":
+        return accounts[0]
+    else:
+        return accounts.add(config["wallets"]["from_key"])
+
+
 
 
 # defining a function to run 
