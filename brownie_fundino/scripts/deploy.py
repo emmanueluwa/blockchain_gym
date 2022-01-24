@@ -14,6 +14,7 @@ def deploy_fundino():
     # pass price feed address to fundino contract
     fundino_me = Fundino.deploy(price_feed_address, {"from": account}, publish_source=config["networks"][network.show_active()].get("verify"),)
     print(f"Contract deployed to {fundino_me.address}")
+    return fundino_me
 
 def main():
     deploy_fundino()
