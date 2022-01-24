@@ -1,5 +1,5 @@
 from brownie import Fundino, MockV3Aggregator, network, config
-from scripts.helpful_scripts import get_account, deploy_mocks, LOCAL_BLOCKCHAIN_ENVIRONMENTS
+from scripts.helpful_scripts import get_account, deploy_mocks, LOCAL_BLOCKCHAIN_ENVIRONMENTS, FORKED_LOCAL_ENVIRONMENTS
 
 def deploy_fundino():
     account = get_account()

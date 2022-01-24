@@ -6,7 +6,7 @@ import pytest
 def test_can_fund_and_withdraw():
     account = get_account()
     fundino_me = deploy_fundino()
-    entrance_fee = fundino_me.getEntranceFee()
+    entrance_fee = fundino_me.getEntranceFee() + 100 #+100 accounts for incase we need more p
     transaction = fundino_me.fund({"from": account, "value": entrance_fee})
     transaction.wait(1)
     assert fundino_me.addressToAmountFunded(account.address) == entrance_fee
