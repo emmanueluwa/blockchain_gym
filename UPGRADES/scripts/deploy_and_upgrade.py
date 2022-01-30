@@ -1,5 +1,5 @@
-from scripts.helpful_scripts import get_account, encode_function_data
-from brownie import network, Box, ProxyAdmin, TransparentUpgradeableProxy, Contract
+from scripts.helpful_scripts import get_account, encode_function_data, upgrade
+from brownie import network, Box, ProxyAdmin, TransparentUpgradeableProxy, Contract, BoxV2
 
 def main():
     account = get_account()
@@ -29,6 +29,14 @@ def main():
     transaction_store.wait(1)
 
     # upgrading from v1 to v2 w increment function
-    
+    box_v2 = BoxV2.deploy({"from": account})
+    upgrade_transaction = upgrade(account, proxy, box_v2.address, proxy_admin_contract=proxy_admin)
+    upgrade_transaction.wait(1)
+    print("Proxy has been upgraded")
+    proxy_box = Contract.from_abi("BoxV2", proxy.address, BoxV2.abi)
+    increment_transaction = proxy_box.increment({"from": account})
+    increment_transaction.wait(1)
+    print(proxy_box.retrieve())
+
 
 
